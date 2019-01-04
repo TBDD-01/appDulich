@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtTenTour"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Tour:  "
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/editTenTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@id/txtTenTour"
+        android:enabled="false"
+        />
+
+    <TextView
+        android:id="@+id/txtNgayBD"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_below="@id/txtTenTour"
+        android:text="Ngày đi: "
+        android:textSize="20dp"
+        android:layout_alignParentLeft="true"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@id/txtEmail"
+        android:id="@+id/editNgayBD"
+        android:layout_below="@id/editTenTour"
+        android:enabled="false"
+        />
+
+    <TextView
+        android:id="@+id/txtNgayKT"
+        android:layout_width="65dp"
+        android:layout_height="51dp"
+        android:layout_below="@id/editNgayBD"
+        android:layout_alignParentStart="true"
+        android:text="Ngày về: "
+        android:textSize="20dp" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editNgayBD"
+        android:id="@+id/editNgayKT"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@id/txtNgayKT"/>
+
+    <TextView
+        android:id="@+id/txtHDV"
+        android:layout_width="65dp"
+        android:layout_height="51dp"
+        android:layout_below="@id/txtNgayKT"
+        android:layout_alignParentStart="true"
+        android:text="Hướng dẫn viên: "
+        android:textSize="20dp" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editNgayKT"
+        android:id="@+id/editHDV"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@id/txtHDV"/>
+
+</RelativeLayout>
