@@ -1,4 +1,4 @@
-package com.example.asus.appdulich.ListAdapters;
+package com.example.asus.appdulich.tour;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,14 +11,15 @@ import com.example.asus.appdulich.R;
 
 import Entity.Tour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TourAdapter extends BaseAdapter {
-    private List<Tour> tours;
+    private ArrayList<Tour> tours;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public TourAdapter(Context context, List<Tour> tours) {
+    public TourAdapter(Context context, ArrayList<Tour> tours) {
 //        super();
         this.tours = tours;
         this.context = context;

@@ -5,19 +5,39 @@ import java.util.Date;
 
 public class Tour implements Serializable{
     int idTour;
-    String idHDV;
+    int idHDV;
     int idCTHDV;
-    String ngaybd;
-    String ngaykt;
+    java.sql.Date ngaybd;
+    java.sql.Date ngaykt;
     String tenTour;
-    public Tour(int idTour,String tenTour,String ngaybd, String ngaykt) {
+
+    public Tour() {
+    }
+
+    public Tour(int idTour, String tenTour, java.sql.Date ngaybd, java.sql.Date ngaykt) {
         this.tenTour = tenTour;
         this.ngaybd = ngaybd;
         this.ngaykt = ngaykt;
         this.idTour = idTour;
     }
 
-    public Tour(String tenTour, String ngaybd, String ngaykt, String hdv){
+    public Tour(int idTour, int idHDV, int idCTHDV, java.sql.Date ngaybd, java.sql.Date ngaykt, String tenTour) {
+        this.idTour = idTour;
+        this.idHDV = idHDV;
+        this.idCTHDV = idCTHDV;
+        this.ngaybd = ngaybd;
+        this.ngaykt = ngaykt;
+        this.tenTour = tenTour;
+    }
+    public Tour(int idTour, int idCTHDV, java.sql.Date ngaybd, java.sql.Date ngaykt, String tenTour) {
+        this.idTour = idTour;
+        this.idCTHDV = idCTHDV;
+        this.ngaybd = ngaybd;
+        this.ngaykt = ngaykt;
+        this.tenTour = tenTour;
+    }
+
+    public Tour(String tenTour, java.sql.Date ngaybd, java.sql.Date ngaykt, int hdv){
         this.tenTour= tenTour;
         this.ngaybd = ngaybd;
         this.ngaykt = ngaykt;
@@ -28,11 +48,11 @@ public class Tour implements Serializable{
         this.idTour = idTour;
     }
 
-    public String getIdHDV() {
+    public int getIdHDV() {
         return idHDV;
     }
 
-    public void setIdHDV(String idHDV) {
+    public void setIdHDV(int idHDV) {
         this.idHDV = idHDV;
     }
 
@@ -44,19 +64,19 @@ public class Tour implements Serializable{
         this.idCTHDV = idCTHDV;
     }
 
-    public String getNgaybd() {
+    public java.sql.Date getNgaybd() {
         return ngaybd;
     }
 
-    public void setNgaybd(String ngaybd) {
+    public void setNgaybd(java.sql.Date ngaybd) {
         this.ngaybd = ngaybd;
     }
 
-    public String getNgaykt() {
+    public java.sql.Date getNgaykt() {
         return ngaykt;
     }
 
-    public void setNgaykt(String ngaykt) {
+    public void setNgaykt(java.sql.Date ngaykt) {
         this.ngaykt = ngaykt;
     }
 
