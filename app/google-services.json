@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "31237007283",
+    "firebase_url": "https://database-5a3e6.firebaseio.com",
+    "project_id": "database-5a3e6",
+    "storage_bucket": "database-5a3e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31237007283:android:aee938b2d7821c7a",
+        "android_client_info": {
+          "package_name": "com.example.asus.appdulich"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31237007283-vklf28v987bgf8e0tskm5v7p9hvsiosn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5_oHQ5HQdg9jA4x6jwHIT0xvNTo-L-BA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
