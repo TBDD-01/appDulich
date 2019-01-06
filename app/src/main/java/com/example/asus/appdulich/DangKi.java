@@ -1,5 +1,6 @@
 package com.example.asus.appdulich;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class DangKi extends AppCompatActivity{
     int b;
 
     Connection conn;
-    String un, pass, db,ip;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class DangKi extends AppCompatActivity{
                 b=1;
                 DangKi.CheckRegistor checkRegistor = new DangKi.CheckRegistor();
                 checkRegistor.execute("");
+                Intent intent = new Intent(DangKi.this, DangNhap.class);
+                startActivity(intent);
 
             }
         });
@@ -54,6 +57,8 @@ public class DangKi extends AppCompatActivity{
                 b=2;
                 DangKi.CheckRegistor checkRegistor = new DangKi.CheckRegistor();
                 checkRegistor.execute("");
+                Intent intent = new Intent(DangKi.this, DangNhap.class);
+                startActivity(intent);
 
             }
         });
@@ -65,6 +70,9 @@ public class DangKi extends AppCompatActivity{
                 b=3;
                 DangKi.CheckRegistor checkRegistor = new DangKi.CheckRegistor();
                 checkRegistor.execute("");
+
+                Intent intent = new Intent(DangKi.this, DangNhap.class);
+                startActivity(intent);
 
             }
         });
@@ -102,26 +110,26 @@ public class DangKi extends AppCompatActivity{
                     break;
             }
             if (Ten.trim().equals("")||Usern.trim().equals("") || Passw.trim().equals("")) {
-                z = "vui long nhap day du thong tin";
+                z = "Vui lòng nhập đầy đủ thông tin";
             } else {
                 try {
 
-                    conn = connectionDb.connectionclass(un, pass, db, ip);
+                    conn = connectionDb.connectionclass();
                     if (conn == null) {
-                        z = "vui long kiem tra ket noi";
+                        z = "Vui lòng kiểm tra kết nối";
                     } else {
 
                         Statement stmt = conn.createStatement();
                         ResultSet rs = stmt.executeQuery(query1);
                         if (rs.next()) {
-                            z = "Nguoi dung da ton tai, vui long nhap lai SDT moi";
+                            z = "Người dung đã tồn tại, vui lòng nhập số điệnt hoại mới";
                             isSuccess = false;
                             conn.close();
                         } else {
                             Statement stmt1 = conn.createStatement();
                             ResultSet rs1=stmt1.executeQuery(query);
                             rs1.next();
-                            z = "dang ki thanh cong";
+                            z = "Đăng kí thành công";
                             isSuccess = true;
                             conn.close();
                         }
@@ -137,7 +145,7 @@ public class DangKi extends AppCompatActivity{
             progressBar.setVisibility(View.GONE);
             Toast.makeText(DangKi.this,s,Toast.LENGTH_SHORT).show();
             if(isSuccess){
-                Toast.makeText(DangKi.this,"Dang ki thanh cong",Toast.LENGTH_LONG).show();
+                Toast.makeText(DangKi.this,"Đăng kí thành công",Toast.LENGTH_LONG).show();
             }
         }
     }
