@@ -1,8 +1,10 @@
 package com.example.asus.appdulich;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,11 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public  class DangNhap extends AppCompatActivity {
+public  class MainActivity extends AppCompatActivity {
 
     ConnectionDb connectionDb = new ConnectionDb();
     Button loginCty, loginHDV, loginKhach;
@@ -29,12 +32,12 @@ public  class DangNhap extends AppCompatActivity {
 
 
     Connection conn;
-
+    String un, pass, db,ip;
     int a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dangnhap);
+        setContentView(R.layout.activity_main);
         loginCty = (Button)findViewById(R.id.btnCty);
         loginHDV = (Button)findViewById(R.id.btnHDV);
         loginKhach = (Button)findViewById(R.id.btnKhach);
@@ -43,7 +46,10 @@ public  class DangNhap extends AppCompatActivity {
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
         dk = (TextView) findViewById(R.id.txtdangki);
         progressBar.setVisibility(View.GONE);
-
+        un="sa";
+        pass="1";
+        db="ANDROID";
+        ip="192.168.1.111";
 
 
 
@@ -56,7 +62,6 @@ public  class DangNhap extends AppCompatActivity {
                 CheckLogin checkLogin = new CheckLogin();
                 checkLogin.execute("");
 
-
             }
         });
 
@@ -66,8 +71,6 @@ public  class DangNhap extends AppCompatActivity {
                 a=2;
                 CheckLogin checkLogin = new CheckLogin();
                 checkLogin.execute("");
-
-
 
             }
         });
@@ -79,16 +82,14 @@ public  class DangNhap extends AppCompatActivity {
                 CheckLogin checkLogin = new CheckLogin();
                 checkLogin.execute("");
 
-
             }
         });
 
         dk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DangNhap.this, DangKi.class);
+                Intent intent = new Intent(MainActivity.this, DangKi.class);
                 startActivity(intent);
-
             }
         });
     }
@@ -105,36 +106,36 @@ public  class DangNhap extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             String query = null;
-            String usernam1 = username.getText().toString();
-            String passwordd1 = password.getText().toString();
+            String usernam = username.getText().toString();
+            String passwordd = password.getText().toString();
             switch (a){
                 case 1:
-                    query  = "select * from CongTy where SDT =" +usernam1+"and pass="+passwordd1;
+                    query  = "select * from CongTy where SDT =" +usernam+"and pass="+passwordd;
                     break;
                 case 2:
-                    query  = "select * from KhachHang where SDT =" +usernam1+"and password="+passwordd1;
+                    query  = "select * from KhachHang where SDT =" +usernam+"and password="+passwordd;
                     break;
                 case 3:
-                    query  = "select * from HDVDL where SDT =" +usernam1+"and password="+passwordd1;
+                    query  = "select * from HDVDL where SDT =" +usernam+"and password="+passwordd;
                     break;
             }
-            if (usernam1.trim().equals("") || passwordd1.trim().equals("")) {
-                z = "Vui lòng nhập tên đăng nhập và mật khẩu";
+            if (usernam.trim().equals("") || passwordd.trim().equals("")) {
+                z = "vui long nhap ten dang nhap va mat khau";
             } else {
                 try {
-                    conn = connectionDb.connectionclass();
+                    conn = connectionDb.connectionclass(un, pass, db, ip);
                     if (conn == null) {
-                        z = "Vui lòng kiểm tra kết nối";
+                        z = "vui long kiem tra ket noi";
                     } else {
 
                         Statement stmt = conn.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         if (rs.next()) {
-                            z = "Đăng nhập thành công 1";
+                            z = "Dang nhap thanh cong";
                             isSuccess = true;
                             conn.close();
                         } else {
-                            z = "Người dùng không tồn tại";
+                            z = "nguoi dung khong ton tai";
                             isSuccess = false;
                         }
                     }
@@ -147,46 +148,10 @@ public  class DangNhap extends AppCompatActivity {
         }
         protected void onPostExecute(String s) {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(DangNhap.this,s,Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show();
             if(isSuccess){
-                Toast.makeText(DangNhap.this,"Đăng nhập thành công ",Toast.LENGTH_LONG).show();
-
-                try {
-                    conn = connectionDb.connectionclass();
-                   String usernam1 = username.getText().toString();
-                   String passwordd1 = password.getText().toString();
-                    switch (a){
-                        case 1:
-                        Statement stmt1 = conn.createStatement();
-                         ResultSet rs1 = stmt1.executeQuery("update CongTy set trangthai = 'True' where SDT =" +usernam1+"and pass="+passwordd1);
-                         rs1.next();
-                        conn.close();
-                         break;
-
-                        case 2:
-                            Statement stmt2 = conn.createStatement();
-                            ResultSet rs2 = stmt2.executeQuery("update KhachHang set trangthai = 'True' where SDT =" +usernam1+"and password="+passwordd1);
-                            rs2.next();
-                            conn.close();
-                            break;
-
-                        case 3:
-                            Statement stmt3 = conn.createStatement();
-                            ResultSet rs3 = stmt3.executeQuery("update HDVDL set trangthai = 'True' where SDT =" +usernam1+"and password="+passwordd1);
-                            rs3.next();
-                            conn.close();
-                            break;
-                       }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                Intent intent = new Intent(DangNhap.this, TrangCaNhan.class);
-                startActivity(intent);
-           }
-
+                Toast.makeText(MainActivity.this,"Dang nhap thanh cong",Toast.LENGTH_LONG).show();
+            }
         }
         }
 
