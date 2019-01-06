@@ -30,15 +30,16 @@
         android:text="Ngày đi: "
         android:textSize="20dp"
         android:layout_alignParentLeft="true"/>
+
     <EditText
+        android:id="@+id/editNgayBD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@id/txtEmail"
-        android:id="@+id/editNgayBD"
         android:layout_below="@id/editTenTour"
-        android:enabled="false"
-        />
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@+id/txtNgayBD"
+        android:enabled="false" />
 
     <TextView
         android:id="@+id/txtNgayKT"
@@ -58,8 +59,8 @@
 
     <TextView
         android:id="@+id/txtHDV"
-        android:layout_width="65dp"
-        android:layout_height="51dp"
+        android:layout_width="86dp"
+        android:layout_height="50dp"
         android:layout_below="@id/txtNgayKT"
         android:layout_alignParentStart="true"
         android:text="Hướng dẫn viên: "

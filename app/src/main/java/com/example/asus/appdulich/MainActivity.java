@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.asus.appdulich.conn.ConnectionDb;
 import com.example.asus.appdulich.tour.TourAdapter;
@@ -43,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
             try {
                 conn = db.connectionclass();
                 //query
-                String query = "SELECT CTHDV.idTour, idCTHDV, ngaybd, ngaykt, Tour.TenTour FROM CTHDV, Tour WHERE CTHDV.idTour = Tour.idTour";
+                String query = "SELECT idHDV,CTHDV.idTour,idCTHDV, ngaybd, ngaykt, Tour.TenTour FROM CTHDV, Tour WHERE CTHDV.idTour = Tour.idTour";
                 Statement stm = conn.createStatement();
                 ResultSet rs = stm.executeQuery(query);
                 //Lấy từng tour ra rồi đưa vào mảng
                 while (rs.next()) {
                     //lấy 1 tour từ rs
-                    Tour t = new Tour(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getDate(4),
-                            rs.getString(5));
+                    Tour t = new Tour(rs.getInt(1),rs.getInt(2), rs.getInt(3), rs.getDate(4), rs.getDate(5),
+                            rs.getString(6));
                     //thêm vào list
                     tList.add(t);
                 }
@@ -70,8 +71,18 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Object o = listView.getItemAtPosition(position);
-                    Tour hdv = (Tour) o;
+                    Tour tour = (Tour) o;
                     setContentView(R.layout.tour_detail);
+
+                    TextView name = findViewById(R.id.editTenTour);
+                    TextView startDay = findViewById(R.id.editNgayBD);
+                    TextView endDay = findViewById(R.id.editNgayKT);
+                    TextView guide = findViewById(R.id.editHDV);
+
+                    name.setText(tour.getTenTour());
+                    startDay.setText(tour.getNgaybd().toString());
+                    endDay.setText(tour.getNgaykt().toString());
+                    guide.setText(String.valueOf(tour.getIdHDV()));
                 }
             });
         }
